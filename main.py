@@ -115,8 +115,11 @@ import glob
 def rename_download(save_folder, new_filename):
     files = glob.glob(save_folder + '/*')
     max_file = max(files, key=os.path.getctime)
-    filename = max_file.split("/")[-1].split(".")[0]
+    print(max_file)
+    filename = max_file.split("\\")[-1].split(".")[0]
+    print(filename)
     new_path = max_file.replace(filename, new_filename)
+    print(new_path)
     os.rename(max_file, new_path)
     return new_path
 
@@ -124,7 +127,11 @@ def rename_download(save_folder, new_filename):
 #filename is decided by time stamp (no matter where it will be in Chicago's time (universal here))
 def give_label():
     current_time = datetime.datetime.now(pytz.timezone('America/Chicago'))
-    return current_time
+    stime = str(current_time)
+    stime=stime.replace(':', '-')
+    stime=stime.replace('.', '-')
+    print(stime)
+    return stime
 
 # Start Flask app
 if __name__ == '__main__':
