@@ -1,15 +1,8 @@
-{% extends "base.html" %} {% block title %}Business Raccoon | Home{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Meet the Devs{% endblock %} {% block content
 %}
 <h1 align="center">Business Raccoon</h1>
-<h3 align="center">Here for all your business taxing needs!</h3>
+<h2 align="center">Here for all your business taxing needs!</h2>
 <ul class="list-group list-group-flush" id="notes">
-<br>
-<br>
-<p align="left">
-  Business Raccoon is a service you can use to assess the taxing needs of your business. 
-  Just give us the title of your business and we'll assess the appropraite course of action for your business based on historical data of other businesses similar to yours.
-</p>
-<img src="img/rac.png"></img>
   {% for note in user.notes %}
   <li class="list-group-item">
     {{ note.data }}
