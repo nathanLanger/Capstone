@@ -95,7 +95,7 @@ def download_excel_route():
 
 #right now simply checks if the server has any msb data
 from pathlib import Path
-def due_for_updated_data():
+def due_for_updated_data(save_folder):
     # Set the path to your downloads directory
     downloads_dir = Path("downloads")  # Replace with actual path
 
@@ -103,11 +103,38 @@ def due_for_updated_data():
     if downloads_dir.exists() and downloads_dir.is_dir():
         # Check if there are any files in the directory
         if any(downloads_dir.iterdir()):
+            #file => see date
             print("There are files in the downloads directory.")
-            return False
+
+            #get file date
+            files = glob.glob(save_folder + '/*')
+            max_file = max(files, key=os.path.getctime)
+            filename = max_file.split("\\")[-1].split(".")[0]
+
+            #compare tokens
+            file_tokens = tokenize_time(filename)
+            cur_time_tokens = tokenize_time(str(datetime.datetime.now(pytz.timezone('America/Chicago'))))
+            #if current year is greater then update
+            if(int(cur_time_tokens[0]) > int(file_tokens[0])):  #yr v yr
+                return True
+            elif(int(cur_time_tokens[1]) > int(file_tokens[1])):    #month v month
+                return True
+            elif(int(cur_time_tokens[2]) > int(file_tokens[2])):    #day v day
+                return True
+            elif(int(cur_time_tokens[3]) > int(file_tokens[3])):    #hour v hour (update every hour)
+                return True
+            else:
+                return False    #if only a difference of minutes, do not update
         else:
+            #no files => make one
             print("No files found in the downloads directory.")
             return True
+
+def tokenize_time(s):
+    s=s.replace(':', '-').replace('.', '-').replace(' ', '-')
+    tokens = s.split("-")
+    print(tokens)
+    return tokens
 
 import glob
 #uses os so may not be good
@@ -115,11 +142,8 @@ import glob
 def rename_download(save_folder, new_filename):
     files = glob.glob(save_folder + '/*')
     max_file = max(files, key=os.path.getctime)
-    print(max_file)
     filename = max_file.split("\\")[-1].split(".")[0]
-    print(filename)
     new_path = max_file.replace(filename, new_filename)
-    print(new_path)
     os.rename(max_file, new_path)
     return new_path
 
@@ -128,14 +152,12 @@ def rename_download(save_folder, new_filename):
 def give_label():
     current_time = datetime.datetime.now(pytz.timezone('America/Chicago'))
     stime = str(current_time)
-    stime=stime.replace(':', '-')
-    stime=stime.replace('.', '-')
-    print(stime)
+    stime=stime.replace(':', '-').replace('.', '-').replace(' ', '-')
     return stime
 
 # Start Flask app
 if __name__ == '__main__':
-    if(due_for_updated_data()):
+    if(due_for_updated_data('downloads')):
         print("Starting download...")
         download_excel_route()  # Calling the download_excel function directly here
         rename_download('downloads', give_label())
