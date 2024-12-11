@@ -1,15 +1,46 @@
 {% extends "base.html" %} {% block title %}Business Raccoon | Home{% endblock %} {% block content
 %}
-<h1 align="center">Business Raccoon</h1>
-<h3 align="center">Here for all your business taxing needs!</h3>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_-_2SxIy0eU_X2K9bsDt_YyIKi0iTAmiFdA&s" style="height:200px; margin-left:-15px;" />
+    </div>
+    <div class="col">
+      <h1 align="center">Business Raccoon</h1>
+      <p align="center" font-size:30px;>Here for all Your Business Taxing Needs!</p>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<img src="https://img.freepik.com/free-photo/paper-airplane-background-city_1194-7241.jpg?t=st=1733945737~exp=1733949337~hmac=7041caada54fcef8c6b5bb794335519cddb0ffbcf46a10efbd33492c49b30595&w=1380" width="1100" class=="center"/>
+
+
 <ul class="list-group list-group-flush" id="notes">
-<br>
-<br>
-<p align="left">
-  Business Raccoon is a service you can use to assess the taxing needs of your business. 
-  Just give us the title of your business and we'll assess the appropraite course of action for your business based on historical data of other businesses similar to yours.
-</p>
-<img src="img/rac.png"></img>
+  <br>
+  <br>
+  <p align="left">
+    Business Raccoon is a service you can use to assess the taxing needs of your business. 
+    Just give us the title of your business and we'll assess the appropraite course of action for your business based on historical data of other businesses similar to yours.
+  </p>
+  <p>
+    The term "money services business" includes any person doing business, whether or not on a regular basis or as an organized business concern, in one or more of the following capacities:
+  </p>
+  <ul>
+    <li>Currency dealer or exchanger. </li>
+    <li>Check casher.</li>
+    <li>Issuer of traveler's checks, money orders or stored value.</li>
+    <li>Seller or redeemer of traveler's checks, money orders or stored value. </li>
+    <li>Money transmitter.</li>
+    <li>U.S. Postal Service.</li>
+  </ul>
+  <br>
+  <p>
+    An activity threshold of greater than $1,000 per person per day in one or more transactions applies to the definitions of: currency dealer or exchanger; check casher; issuer of traveler's checks, money orders or stored value; and seller or redeemer of travelers' checks, money orders or stored value. The threshold applies separately to each activity -- if the threshold is not met for the specific activity, the person engaged in that activity is not an MSB on the basis of that activity.
+
+    No activity threshold applies to the definition of money transmitter. Thus, a person who engages as a business in the transfer of funds is an MSB as a money transmitter, regardless of the amount of money transmission activity.
+  </p>
   {% for note in user.notes %}
   <li class="list-group-item">
     {{ note.data }}

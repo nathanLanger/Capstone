@@ -23,6 +23,25 @@ def home():
 
     return render_template("home.html", user=current_user)
 
+@views.route('msb', methods=['GET', 'POST'])
+def msb():
+    if request.method == 'POST': 
+        note = request.form.get('note')#Gets the note from the HTML 
+
+        if len(note) < 1:
+            flash('Note is too short!', category='error') 
+        else:
+            new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note 
+            db.session.add(new_note) #adding the note to the database 
+            db.session.commit()
+            flash('Note added!', category='success')
+
+    return render_template("msb.html", user=current_user)
+
+@views.route('meet', methods=['GET', 'POST'])
+def meet():
+    return render_template("meet.html", user=current_user)
+
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
