@@ -1,22 +1,14 @@
 {% extends "base.html" %} {% block title %}Meet the Devs{% endblock %} {% block content
 %}
-<h1 align="center">Business Raccoon</h1>
-<h2 align="center">Here for all business taxing needs!</h2>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
+<h1 align="center">Meet the Developers</h1>
+<h2 align="center">Here for all your developement needs!</h2>
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+<div align="center" class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="HORIZONTAL" data-vanity="jubin-joseph-5b9428264" data-version="v1">
+  <a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/jubin-joseph-5b9428264?trk=profile-badge">Jubin Joseph</a>
+</div>
+              
+
 <form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
-  </div>
+
 </form>
 {% endblock %}
