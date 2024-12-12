@@ -29,8 +29,8 @@ def msb():
         fname = request.form.get('fname')
         lname = request.form.get('lname')
         bname = request.form.get('bname')
-        #new_note = Note(data=bname, user_id=current_user.id)
-        #db.session.add(new_note)
+        #newb = Business(data=bname, user_id=current_user.id)
+        #db.session.add(newb)
         #db.session.commit()
         flash('Data Received', category='success')
 
