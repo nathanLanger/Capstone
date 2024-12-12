@@ -5,9 +5,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 import glob
 import os
-from website.views import *
+from website.views import bname
 
-print(views.bname)
 #1. Get most recent data
 def get_most_recent_download(save_folder):
     files = glob.glob(save_folder + '/*')
@@ -124,6 +123,5 @@ def predict_entry(new_entry):
 def submit(input):
     predict_entry(input)
 
-input = 'LUCKY STOP & SHOP'
+input = bname
 print(submit(input))
-
