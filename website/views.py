@@ -198,7 +198,7 @@ def get_output():
     import smtplib
     #SERVER = "localhost"
 
-    FROM = 'nlange2021@gmail.com'
+    FROM = 'BusinessRaccoon.com'
 
     global email
     TO = [email] # must be a list

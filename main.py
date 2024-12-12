@@ -182,5 +182,4 @@ if __name__ == '__main__':
         download_excel_route()  # Calling the download_excel function directly here
         convert_download('downloads', give_label())
         print("Download completed.")
-    app.jinja_env.globals.update(get_var)
     app.run(debug=True)
