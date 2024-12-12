@@ -17,3 +17,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
 
+class Business(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    bname = db.Column(db.String(150), unique=True)
+
