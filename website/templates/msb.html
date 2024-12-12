@@ -58,4 +58,9 @@
   <br/>
   <br/>
   <p>Is your MSB eligible for 405? See what our algorithm says!</p>
+  {% if output %}
+    {% for each in output%}
+      <li>{{ each }}</li>
+    {% endfor %}
+  {% endif %}
 {% endblock %}
