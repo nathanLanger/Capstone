@@ -200,11 +200,12 @@ def get_output():
 
     FROM = 'nlange2021@gmail.com'
 
+    global email
     TO = [email] # must be a list
 
     SUBJECT = "Here is the suggested msb activities for your MSB!"
 
-    TEXT = "This message was sent with Python's smtplib."
+    TEXT = output +""
 
     # Prepare actual message
 
