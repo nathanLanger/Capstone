@@ -5,6 +5,7 @@ from .models import Business
 from . import db
 import json
 
+
 views = Blueprint('views', __name__)
 
 
