@@ -137,15 +137,35 @@ def tokenize_time(s):
     return tokens
 
 import glob
+import pandas as pd
 #uses os so may not be good
 #https://stackoverflow.com/questions/38459972/rename-downloaded-files-selenium#:~:text=You%20don't%20have%20control,and%20then%20rename%20it%20accordingly.
-def rename_download(save_folder, new_filename):
+def convert_download(save_folder, new_filename):
+    # Find most recent file and rename
     files = glob.glob(save_folder + '/*')
     max_file = max(files, key=os.path.getctime)
     filename = max_file.split("\\")[-1].split(".")[0]
     new_path = max_file.replace(filename, new_filename)
     os.rename(max_file, new_path)
-    return new_path
+
+    # Convert the Excel file to CSV
+    try:
+        # Specify the engine as 'xlrd' for .xls files
+        df = pd.read_csv(new_path, delimiter='\t')
+    except Exception as e:
+        print(f"Error reading Excel(CSV) file: {e}")
+        return None
+    
+    # Remove the XLS
+    os.remove(new_path)
+    
+    # Define the CSV file path
+    csv_path = new_path.replace(".xls", ".csv")
+    
+    # Save as CSV
+    df.to_csv(csv_path, index=False)  # Save as CSV without the index column
+    
+    return csv_path  # Return the path to the CSV file
 
 #https://www.geeksforgeeks.org/get-current-date-and-time-using-python/
 #filename is decided by time stamp (no matter where it will be in Chicago's time (universal here))
@@ -160,6 +180,6 @@ if __name__ == '__main__':
     if(due_for_updated_data('downloads')):
         print("Starting download...")
         download_excel_route()  # Calling the download_excel function directly here
-        rename_download('downloads', give_label())
+        convert_download('downloads', give_label())
         print("Download completed.")
     app.run(debug=True)
