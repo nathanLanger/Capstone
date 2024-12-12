@@ -13,7 +13,7 @@ def get_most_recent_download(save_folder):
     filename = max_file
     return filename
 filename = get_most_recent_download('downloads')
-print(filename)
+#print(filename)
 # All data at disposal
 """ entries = pd.read_csv(filename, encoding='latin1')[['LEGAL NAME','DBA NAME','STREET ADDRESS','CITY',
                                                    'STATE','ZIP','MSB ACTIVITIES','STATES OF MSB ACTIVITIES',
@@ -85,13 +85,13 @@ entries.entry.head().apply(split_into_lemmas)
 
 #5.
 bow_transformer = CountVectorizer(analyzer=split_into_lemmas).fit(entries['entry'])
-print(len(bow_transformer.vocabulary_))
+#print(len(bow_transformer.vocabulary_))
 
 #6.
 entries_bow = bow_transformer.transform(entries['entry'])
-print('sparse matrix shape:', entries_bow.shape)
+""" print('sparse matrix shape:', entries_bow.shape)
 print('number of non-zeros:', entries_bow.nnz)
-print('sparsity: %.2f%%' % (100.0 * entries_bow.nnz / (entries_bow.shape[0] * entries_bow.shape[1])))
+print('sparsity: %.2f%%' % (100.0 * entries_bow.nnz / (entries_bow.shape[0] * entries_bow.shape[1]))) """
 
 # Get the size of entries and factor into test size
 rows, columns = entries.shape
@@ -111,16 +111,18 @@ entries_class = MultinomialNB().fit(entries_bow_train, entries_class_train)
 
 predictions = entries_class.predict(entries_bow_test)
 
-print(classification_report(entries_class_test, predictions))
+#print(classification_report(entries_class_test, predictions))
 
 #8. 
 def predict_entry(new_entry):
     new_sample = bow_transformer.transform([new_entry])
-    print(new_entry, np.around(entries_class.predict_proba(new_sample), decimals=5),"\n")
+    #print(new_entry, np.around(entries_class.predict_proba(new_sample), decimals=5),"\n")
+    return(new_entry, np.around(entries_class.predict_proba(new_sample), decimals=5),"\n")
 
 # Submit an entry
 def submit(input):
     predict_entry(input)
 
 input = 'LUCKY STOP & SHOP'
-submit(input)
+output = submit(input)
+print(output)
