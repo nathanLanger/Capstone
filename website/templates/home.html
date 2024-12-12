@@ -22,39 +22,46 @@
   <br>
   <p align="left">
     Business Raccoon is a service you can use to assess the taxing needs of your business. 
-    Just give us the title of your business and we'll assess the appropraite course of action for your business based on historical data of other businesses similar to yours.
+    Just give us the title of your business and we'll assess the appropraite course of action for 
+    your business based on historical data of other businesses similar to yours.
   </p>
   <p>
-    The term "money services business" includes any person doing business, whether or not on a regular basis or as an organized business concern, in one or more of the following capacities:
+    The term "money services business" includes any person doing business, whether or not on a 
+    regular basis or as an organized business concern, in one or more of the following capacities:
   </p>
   <ul>
-    <li>Currency dealer or exchanger. </li>
+    <li>Currency dealer or exchanger.</li>
     <li>Check casher.</li>
     <li>Issuer of traveler's checks, money orders or stored value.</li>
-    <li>Seller or redeemer of traveler's checks, money orders or stored value. </li>
+    <li>Seller or redeemer of traveler's checks, money orders or stored value.</li>
     <li>Money transmitter.</li>
     <li>U.S. Postal Service.</li>
   </ul>
   <br>
   <p>
-    An activity threshold of greater than $1,000 per person per day in one or more transactions applies to the definitions of: currency dealer or exchanger; check casher; issuer of traveler's checks, money orders or stored value; and seller or redeemer of travelers' checks, money orders or stored value. The threshold applies separately to each activity -- if the threshold is not met for the specific activity, the person engaged in that activity is not an MSB on the basis of that activity.
-
-    No activity threshold applies to the definition of money transmitter. Thus, a person who engages as a business in the transfer of funds is an MSB as a money transmitter, regardless of the amount of money transmission activity.
+    An activity threshold of greater than $1,000 per person per day in one or more transactions 
+    applies to the definitions of: currency dealer or exchanger; check casher; issuer of traveler's 
+    checks, money orders or stored value; and seller or redeemer of travelers' checks, money orders or 
+    stored value. The threshold applies separately to each activity -- if the threshold is not met for 
+    the specific activity, the person engaged in that activity is not an MSB on the basis of that activity. 
+    No activity threshold applies to the definition of money transmitter. Thus, a person who engages as a 
+    business in the transfer of funds is an MSB as a money transmitter, regardless of the amount of 
+    money transmission activity.
   </p>
-  {% for note in user.notes %}
-  <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
+  <p>
+    No activity threshold applies to the definition of money transmitter. Thus, a person who 
+    engages as a business in the transfer of funds is an MSB as a money transmitter, regardless of the 
+    amount of money transmission activity.
+  </p>
+  <p>
+    Notwithstanding the previous discussion, the term "money services business" does not include:
+  </p>
+  <ul>
+    <li>A bank, as that term is defined in 31 CFR 1010.100(d) (formerly 31 CFR 103.11(c)), or</li>
+    <li>A person registered with, and regulated or examined by, the Securities and Exchange Commission 
+      or the Commodity Futures Trading Commission.</li>
+  </ul>
 </ul>
 <form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
-  </div>
 </form>
 {% endblock %}
