@@ -124,4 +124,4 @@ def submit(input):
     predict_entry(input)
 
 input = bname
-print(submit(input))
+submit(input)

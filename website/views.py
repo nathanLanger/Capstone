@@ -24,6 +24,8 @@ def home():
 
     return render_template("home.html", user=current_user)
 
+output = ''
+email = ''
 bname = ''
 @views.route('msb', methods=['GET', 'POST'])
 def msb():
@@ -177,29 +179,42 @@ def get_output():
     #8. 
     def predict_entry(new_entry):
         new_sample = bow_transformer.transform([new_entry])
-        print(new_entry, np.around(entries_class.predict_proba(new_sample), decimals=5),"\n")
+        #print(new_entry, np.around(entries_class.predict_proba(new_sample), decimals=5),"\n")
+        return entries_class.predict_proba(new_sample)
 
     # Submit an entry
     def submit(input):
-        predict_entry(input)
+        global output
+        output = predict_entry(input)
+        return output
 
     input = bname
-    print(submit(input))
+    global output
+    output = submit(input)
 
-    from flask import Flask, render_template, request
-    from bs4 import BeautifulSoup
-    import requests
+    import smtplib
+    #SERVER = "localhost"
 
-    app = Flask(__name__)
+    FROM = 'nlange2021@gmail.com'
 
-    @app.route("/")
-    def index():
-        return render_template("index.html")
+    TO = [email] # must be a list
 
-    @app.route("/goudprijs")
-    def priceTracker():
-        url = 'https://finance.yahoo.com/quote/GC%3DF?p=GC%3DF'
-        page = requests.get(url)
-        soup = BeautifulSoup(page.text, 'lxml')
-        price = soup.find_all('div', {'class':'D(ib) Mend(20px)'})[0].find('fin-streamer').text
-        return render_template('goudprijs.html', price=price)
+    SUBJECT = "Here is the suggested msb activities for your MSB!"
+
+    TEXT = "This message was sent with Python's smtplib."
+
+    # Prepare actual message
+
+    message = """\
+    From: %s
+    To: %s
+    Subject: %s
+
+    %s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+
+    # Send the mail
+
+    server = smtplib.SMTP('myserver')
+    server.sendmail(FROM, TO, message)
+    server.quit()
