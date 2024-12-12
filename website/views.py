@@ -27,13 +27,16 @@ def home():
 output = ''
 email = ''
 bname = ''
+email = ''
 @views.route('msb', methods=['GET', 'POST'])
 def msb():
     if request.method == 'POST': 
         fname = request.form.get('fname')
         lname = request.form.get('lname')
+        global email
         global bname
         bname = request.form.get('bname')
+        email = request.form.get('email')
         #newb = Business(data=bname, user_id=current_user.id)
         #db.session.add(newb)
         #db.session.commit()
