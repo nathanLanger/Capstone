@@ -4,6 +4,14 @@ from .models import Note
 from .models import Business
 from . import db
 import json
+import pandas as pd
+import numpy as np
+from textblob import TextBlob
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+import glob
+import os
+from website.views import bname
 
 views = Blueprint('views', __name__)
 
@@ -63,15 +71,6 @@ def delete_note():
     return jsonify({})
 
 def get_output():
-    import pandas as pd
-    import numpy as np
-    from textblob import TextBlob
-    from sklearn.feature_extraction.text import CountVectorizer
-    from sklearn.naive_bayes import MultinomialNB
-    import glob
-    import os
-    from website.views import bname
-
     #1. Get most recent data
     def get_most_recent_download(save_folder):
         files = glob.glob(save_folder + '/*')
